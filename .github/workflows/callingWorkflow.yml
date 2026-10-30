@@ -1,0 +1,27 @@
+name: SAPI CI-CD
+
+on:
+  push:
+    branches:
+      - develop
+  pull_request:
+    branches:
+      - develop  
+      
+  workflow_dispatch: 
+    inputs:
+      environment:
+        description: Environment to deploy to
+        type: choice
+        options:
+          - dev
+          - qa
+          - prod 
+        default: dev
+
+jobs:
+  pipeline:
+    uses: GayathriNuthalapati/common-pipeline/.github/workflows/main.yml@main
+    with:
+      environment: dev
+    secrets: inherit
