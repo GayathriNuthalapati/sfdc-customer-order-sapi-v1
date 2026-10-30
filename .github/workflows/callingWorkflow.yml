@@ -1,0 +1,26 @@
+name: SAPI CI-CD
+
+on:
+  pull_request:
+    branches:
+      - dev
+      - qa
+      - main
+      
+  workflow_dispatch: 
+    inputs:
+      environment:
+        description: Environment to deploy to
+        type: choice
+        options:
+          - dev
+          - qa
+          - prod 
+        default: dev
+
+jobs:
+  pipeline:
+    uses: GayathriNuthalapati/common-pipeline-code/.github/workflows/mulesoft-cicd-pipeline.yml@main
+    with:
+      environment: ${{ github.event_name == 'workflow_dispatch' && inputs.environment || (github.event_name == 'pull_request' && github.base_ref || github.ref_name) == 'main' && 'prod' || (github.event_name == 'pull_request' && github.base_ref || github.ref_name) == 'qa' && 'qa' || 'dev' }}
+    secrets: inherit
