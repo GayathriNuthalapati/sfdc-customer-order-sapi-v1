@@ -3,10 +3,13 @@ name: SAPI CI-CD
 on:
   push:
     branches:
-      - develop
+      - dev
+      - feature
   pull_request:
     branches:
-      - develop  
+      - dev
+      - qa
+      - main
       
   workflow_dispatch: 
     inputs:
@@ -21,7 +24,7 @@ on:
 
 jobs:
   pipeline:
-    uses: GayathriNuthalapati/common-pipeline/.github/workflows/main.yml@main
+    uses: GayathriNuthalapati/common-pipeline-code/.github/workflows/mulesoft-cicd-pipeline.yml@main
     with:
       environment: dev
     secrets: inherit
