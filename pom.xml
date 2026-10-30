@@ -4,7 +4,7 @@
 
 	<groupId>${business.group.id}</groupId>
 	<artifactId>sfdc-customer-order-sapi-dev</artifactId>
-	<version>1.0.4</version>
+	<version>1.0.6</version>
 	<packaging>mule-application</packaging>
 
 	<name>sfdc-customer-order-sapi-v1-devv</name>
