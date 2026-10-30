@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - dev
-      - feature
   pull_request:
     branches:
       - dev
@@ -26,5 +25,5 @@ jobs:
   pipeline:
     uses: GayathriNuthalapati/common-pipeline-code/.github/workflows/mulesoft-cicd-pipeline.yml@main
     with:
-      environment: dev
+      environment: ${{ github.event_name == 'workflow_dispatch' && inputs.environment || (github.event_name == 'pull_request' && github.base_ref || github.ref_name) == 'main' && 'prod' || (github.event_name == 'pull_request' && github.base_ref || github.ref_name) == 'qa' && 'qa' || 'dev' }}
     secrets: inherit
